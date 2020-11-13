@@ -197,6 +197,16 @@ export type RegularUserResponseFragment = (
   )> }
 );
 
+export type AddFileMutationVariables = Exact<{
+  file: Scalars['Upload'];
+}>;
+
+
+export type AddFileMutation = (
+  { __typename?: 'Mutation' }
+  & Pick<Mutation, 'addFile'>
+);
+
 export type ChangePasswordMutationVariables = Exact<{
   token: Scalars['String'];
   newPassword: Scalars['String'];
@@ -389,6 +399,36 @@ export const RegularUserResponseFragmentDoc = gql`
 }
     ${RegularErrorFragmentDoc}
 ${RegularUserFragmentDoc}`;
+export const AddFileDocument = gql`
+    mutation addFile($file: Upload!) {
+  addFile(file: $file)
+}
+    `;
+export type AddFileMutationFn = Apollo.MutationFunction<AddFileMutation, AddFileMutationVariables>;
+
+/**
+ * __useAddFileMutation__
+ *
+ * To run a mutation, you first call `useAddFileMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAddFileMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [addFileMutation, { data, loading, error }] = useAddFileMutation({
+ *   variables: {
+ *      file: // value for 'file'
+ *   },
+ * });
+ */
+export function useAddFileMutation(baseOptions?: Apollo.MutationHookOptions<AddFileMutation, AddFileMutationVariables>) {
+        return Apollo.useMutation<AddFileMutation, AddFileMutationVariables>(AddFileDocument, baseOptions);
+      }
+export type AddFileMutationHookResult = ReturnType<typeof useAddFileMutation>;
+export type AddFileMutationResult = Apollo.MutationResult<AddFileMutation>;
+export type AddFileMutationOptions = Apollo.BaseMutationOptions<AddFileMutation, AddFileMutationVariables>;
 export const ChangePasswordDocument = gql`
     mutation ChangePassword($token: String!, $newPassword: String!) {
   changePassword(token: $token, newPassword: $newPassword) {

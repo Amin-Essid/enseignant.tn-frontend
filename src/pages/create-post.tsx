@@ -3,18 +3,30 @@ import { Formik, Form } from "formik";
 import React from "react";
 import { InputField } from "../components/InputField";
 import { Wrapper } from "../components/Wrapper";
-import { useCreatePostMutation } from "../generated/graphql";
+import {
+  useAddFileMutation,
+  useCreatePostMutation,
+} from "../generated/graphql";
 import { useRouter } from "next/router";
 import { Layout } from "../components/Layout";
 import { useIsAuth } from "../utils/useIsAuth";
 import { withApollo } from "../utils/withApollo";
 
 interface createPostProps {}
+interface fileObjectType {
+  name: string;
+  size: number;
+  type: string;
+  lastModified?: any;
+  lastModifiedDate?: any;
+  webkitRelativePath?: any;
+}
 
 const createPost: React.FC<createPostProps> = ({}) => {
   const router = useRouter();
   useIsAuth();
   const [createPost] = useCreatePostMutation();
+  const [addFile] = useAddFileMutation();
   return (
     <Layout variant="small">
       <Wrapper variant="small">
@@ -28,20 +40,59 @@ const createPost: React.FC<createPostProps> = ({}) => {
             unit: "",
             filename: "",
             text: "",
+            file: null as null | fileObjectType,
           }}
           onSubmit={async (values) => {
-            const { errors } = await createPost({
-              variables: { input: values },
-              update: (cache) => {
-                cache.evict({ fieldName: "posts:{}" });
-              },
-            });
-            if (!errors) {
-              router.push("/");
+            let {
+              file,
+              title,
+              language,
+              type,
+              field,
+              level,
+              unit,
+              text,
+            } = values;
+            if (
+              file &&
+              title !== "" &&
+              language !== "" &&
+              type !== "" &&
+              level !== "" &&
+              field !== "" &&
+              unit !== "" &&
+              text !== ""
+            ) {
+              const { errors } = await createPost({
+                variables: {
+                  input: {
+                    title,
+                    language,
+                    type,
+                    field,
+                    level,
+                    unit,
+                    filename: file!.name,
+                    text,
+                  },
+                },
+                update: (cache) => {
+                  cache.evict({ fieldName: "posts:{}" });
+                },
+              });
+              if (!errors) {
+                await addFile({
+                  variables: { file: values.file },
+                });
+                console.log(errors);
+                router.push("/");
+              }
+            } else {
+              console.log("complete all the form");
             }
           }}
         >
-          {({ isSubmitting }) => (
+          {({ isSubmitting, setFieldValue }) => (
             <Form>
               <InputField name="title" placeholder="title" label="Title" />
               <InputField
@@ -63,17 +114,26 @@ const createPost: React.FC<createPostProps> = ({}) => {
               </Box>
               <Box mt={4}>
                 <InputField
-                  name="filename"
-                  placeholder="filename"
-                  label="filename"
-                />
-              </Box>
-              <Box mt={4}>
-                <InputField
                   textArea
                   name="text"
                   placeholder="text..."
                   label="Text"
+                />
+              </Box>
+              {/* <Box mt={4}>
+                <InputField
+                  name="filename"
+                  placeholder="filename"
+                  label="filename"
+                />
+              </Box> */}
+              <Box>
+                <input
+                  type="file"
+                  name="file"
+                  onChange={(event) => {
+                    setFieldValue("file", event!.currentTarget!.files![0]!);
+                  }}
                 />
               </Box>
               <Button
