@@ -50,6 +50,7 @@ const Index = () => {
                     <EditeDeletePostButtons
                       id={p.id}
                       creatorId={p.creator.id}
+                      filename={p.filename}
                     />
                   </Flex>
                 </Box>

@@ -169,7 +169,7 @@ export type UsernamePasswordInput = {
 
 export type PostSnippetFragment = (
   { __typename?: 'Post' }
-  & Pick<Post, 'id' | 'title' | 'createdAt' | 'creatorId' | 'textSnippet' | 'points' | 'voteStatus'>
+  & Pick<Post, 'id' | 'title' | 'text' | 'points' | 'field' | 'language' | 'unit' | 'type' | 'filename' | 'level' | 'createdAt' | 'updatedAt' | 'textSnippet' | 'voteStatus'>
   & { creator: (
     { __typename?: 'User' }
     & Pick<User, 'id' | 'username'>
@@ -335,7 +335,7 @@ export type PostQuery = (
   { __typename?: 'Query' }
   & { post?: Maybe<(
     { __typename?: 'Post' }
-    & Pick<Post, 'id' | 'title' | 'text' | 'createdAt' | 'creatorId' | 'points' | 'voteStatus'>
+    & Pick<Post, 'id' | 'title' | 'text' | 'points' | 'field' | 'language' | 'unit' | 'type' | 'filename' | 'level' | 'createdAt' | 'updatedAt' | 'textSnippet' | 'voteStatus'>
     & { creator: (
       { __typename?: 'User' }
       & Pick<User, 'id' | 'username'>
@@ -365,8 +365,16 @@ export const PostSnippetFragmentDoc = gql`
     fragment PostSnippet on Post {
   id
   title
+  text
+  points
+  field
+  language
+  unit
+  type
+  filename
+  level
   createdAt
-  creatorId
+  updatedAt
   textSnippet
   points
   voteStatus
@@ -766,9 +774,16 @@ export const PostDocument = gql`
     id
     title
     text
+    points
+    field
+    language
+    unit
+    type
+    filename
+    level
     createdAt
-    creatorId
-    text
+    updatedAt
+    textSnippet
     points
     voteStatus
     creator {

@@ -3,9 +3,16 @@ query Post($id: Int!) {
     id
     title
     text
+    points
+    field
+    language
+    unit
+    type
+    filename
+    level
     createdAt
-    creatorId
-    text
+    updatedAt
+    textSnippet
     points
     voteStatus
     creator {

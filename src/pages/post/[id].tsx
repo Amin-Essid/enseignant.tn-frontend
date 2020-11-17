@@ -38,7 +38,22 @@ const Post = ({}) => {
       <EditeDeletePostButtons
         id={data.post.id}
         creatorId={data.post.creator.id}
+        filename={data.post.filename}
       />
+      {/* <br />
+      <a
+        href={`http://localhost:4000/files/${data.post.filename}`}
+        download={data.post.filename}
+        target="_blank"
+      >
+        download
+      </a>
+      <br /> */}
+      <iframe
+        src={`http://localhost:4000/files/${data.post.filename}`}
+        width="500px"
+        height="700px"
+      ></iframe>
     </Layout>
   );
 };

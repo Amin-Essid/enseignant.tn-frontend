@@ -1,8 +1,16 @@
 fragment PostSnippet on Post {
   id
   title
+  text
+  points
+  field
+  language
+  unit
+  type
+  filename
+  level
   createdAt
-  creatorId
+  updatedAt
   textSnippet
   points
   voteStatus
