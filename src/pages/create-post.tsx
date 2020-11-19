@@ -1,4 +1,4 @@
-import { Box, Button } from "@chakra-ui/core";
+import { Box, Button, FormLabel } from "@chakra-ui/core";
 import { Formik, Form } from "formik";
 import React from "react";
 import { InputField } from "../components/InputField";
@@ -11,6 +11,7 @@ import { useRouter } from "next/router";
 import { Layout } from "../components/Layout";
 import { useIsAuth } from "../utils/useIsAuth";
 import { withApollo } from "../utils/withApollo";
+import { OptionsInputField } from "../components/OptionsInputField";
 
 interface createPostProps {}
 interface fileObjectType {
@@ -94,47 +95,84 @@ const createPost: React.FC<createPostProps> = ({}) => {
         >
           {({ isSubmitting, setFieldValue }) => (
             <Form>
-              <InputField name="title" placeholder="title" label="Title" />
-              <InputField
-                name="language"
-                placeholder="language"
-                label="language"
-              />
+              <InputField name="title" placeholder="title" label="Title:" />
               <Box mt={4}>
-                <InputField name="type" placeholder="type" label="type" />
+                <OptionsInputField
+                  name="language"
+                  placeholder="Language"
+                  options={["english"]}
+                />
               </Box>
               <Box mt={4}>
-                <InputField name="field" placeholder="field" label="field" />
+                <OptionsInputField
+                  name="type"
+                  placeholder="File's type"
+                  options={[
+                    "lesson plan",
+                    "unity plan",
+                    "yearly plan",
+                    "banners",
+                    "other",
+                  ]}
+                />
               </Box>
               <Box mt={4}>
-                <InputField name="level" placeholder="level" label="level" />
+                <OptionsInputField
+                  name="field"
+                  placeholder="Field"
+                  options={[
+                    "all",
+                    "vocabulary",
+                    "writting",
+                    "grammar",
+                    "other",
+                  ]}
+                />
               </Box>
               <Box mt={4}>
-                <InputField name="unit" placeholder="unit" label="unit" />
+                <OptionsInputField
+                  name="level"
+                  placeholder="Class"
+                  options={["4th grade", "5th grade", "6th grade"]}
+                />
+              </Box>
+              <Box mt={4}>
+                <OptionsInputField
+                  name="unit"
+                  placeholder="Unit"
+                  options={[
+                    "0",
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                    "6",
+                    "7",
+                    "8",
+                    "other",
+                  ]}
+                />
               </Box>
               <Box mt={4}>
                 <InputField
                   textArea
-                  name="text"
+                  name="description"
                   placeholder="text..."
-                  label="Text"
+                  label="Text:"
                 />
               </Box>
-              {/* <Box mt={4}>
-                <InputField
-                  name="filename"
-                  placeholder="filename"
-                  label="filename"
-                />
-              </Box> */}
               <Box>
-                <input
-                  type="file"
-                  name="file"
-                  onChange={(event) => {
-                    setFieldValue("file", event!.currentTarget!.files![0]!);
-                  }}
-                />
+                <Box mt={4}>
+                  <FormLabel htmlFor="file">File:</FormLabel>
+                  <input
+                    type="file"
+                    name="file"
+                    onChange={(event) => {
+                      setFieldValue("file", event!.currentTarget!.files![0]!);
+                    }}
+                  />
+                </Box>
               </Box>
               <Button
                 mt={4}

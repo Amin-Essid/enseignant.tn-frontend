@@ -56,11 +56,11 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
   }
 
   return (
-    <Flex position="sticky" zIndex={1} top="0" bg="tan" p={4}>
+    <Flex position="sticky" zIndex={1} top="0" bg="#B794F4" p={4}>
       <Flex maxW={800} align="center" flex={1} m="auto">
         <NextLink href="/">
           <Link>
-            <Heading>Rereddit</Heading>
+            <Heading>Share-it</Heading>
           </Link>
         </NextLink>
         <Box ml={"auto"}>{body}</Box>
