@@ -53,19 +53,6 @@ const Register: React.FC<registerProps> = ({}) => {
               label="Username"
             />
             <Box mt={4}>
-              <InputField name="school" placeholder="school" label="school" />
-            </Box>
-            <Box mt={4}>
-              <InputField name="state" placeholder="state" label="state" />
-            </Box>
-            <Box mt={4}>
-              <InputField
-                name="birthDate"
-                placeholder="birth date"
-                label="Birth date"
-              />
-            </Box>
-            <Box mt={4}>
               <InputField
                 name="email"
                 placeholder="email"
@@ -79,6 +66,19 @@ const Register: React.FC<registerProps> = ({}) => {
                 placeholder="password"
                 label="Password"
                 type="password"
+              />
+            </Box>
+            <Box mt={4}>
+              <InputField name="school" placeholder="school" label="school" />
+            </Box>
+            <Box mt={4}>
+              <InputField name="state" placeholder="state" label="state" />
+            </Box>
+            <Box mt={4}>
+              <InputField
+                name="birthDate"
+                placeholder="birth date"
+                label="Birth date"
               />
             </Box>
             <Button

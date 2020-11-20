@@ -89,6 +89,7 @@ const createPost: React.FC<createPostProps> = ({}) => {
                 router.push("/");
               }
             } else {
+              console.log(values);
               console.log("complete all the form");
             }
           }}
@@ -157,9 +158,9 @@ const createPost: React.FC<createPostProps> = ({}) => {
               <Box mt={4}>
                 <InputField
                   textArea
-                  name="description"
+                  name="text"
                   placeholder="text..."
-                  label="Text:"
+                  label="Description:"
                 />
               </Box>
               <Box>
