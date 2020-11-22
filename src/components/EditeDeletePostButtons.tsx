@@ -21,7 +21,7 @@ export const EditeDeletePostButtons: React.FC<EditeDeletePostButtonsProps> = ({
     return (
       <Box>
         <a
-          href={`http://localhost:4000/files/${filename}`}
+          href={`https://share-education.herokuapp.com/files/${filename}`}
           download={filename}
           target="_blank"
         >
