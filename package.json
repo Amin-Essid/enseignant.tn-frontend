@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start -p $PORT",
+    "start": "next start -p https://share-education.herokuapp.com/graphql",
     "gen": "graphql-codegen --config codegen.yml"
   },
   "dependencies": {
